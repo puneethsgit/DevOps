@@ -1,2 +1,3 @@
-## Day 1
-# What is DevOps?
+# Day 1
+
+### What is DevOps?
