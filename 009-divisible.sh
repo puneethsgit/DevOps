@@ -20,3 +20,5 @@ for i in {1..100}; do
                 echo $i
         fi;
 done
+
+# syntax work in WSL ubuntu and mobaxterm
