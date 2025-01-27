@@ -3,7 +3,7 @@
 #################
 # Author : Puneeth
 # This script print number of s in "mississippi"
-#################
+##################
 
 
 x=mississippi
