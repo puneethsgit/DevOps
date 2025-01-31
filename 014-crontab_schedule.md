@@ -156,3 +156,18 @@ $HOME/resourcelog.txt
 ## License
 This project is licensed under the MIT License.
 
+
+# Yes, for the cron job to execute the script every hour, the system must be **turned on** and **connected to the internet**. If the system is **off or in sleep mode**, the scheduled cron job will not run.
+
+### Alternative Approaches:
+1. **Using a Cloud-Based Scheduler**  
+   If you need the script to run consistently without depending on your local system, consider:
+   - **AWS Lambda**: Deploy the script as a Lambda function and schedule it using **Amazon EventBridge (CloudWatch Events)**.
+   - **AWS Systems Manager (SSM) Automation**: Schedule commands to run on an EC2 instance.
+   - **GitHub Actions** or **CI/CD Pipelines**: Automate execution using GitHub workflows.
+
+2. **Running the Script on an Always-On Server**
+   - Deploy the script on an **AWS EC2 instance**.
+   - Configure **crontab** on the instance to run the script at your desired interval.
+
+Would you like help setting it up on a cloud-based environment? 🚀
