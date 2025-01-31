@@ -9,6 +9,10 @@
 # This script will report AWS resource usage and store it in a log file.
 ####################################
 
+# Set the time zone to Asia/Kolkata (IST)
+export TZ="Asia/Kolkata"
+
+
 # Define the log file path
 LOG_FILE="$HOME/resourcelog.txt"
 
