@@ -90,8 +90,9 @@ user3
   - The GitHub token has the correct scope (`repo` for private repositories).
 
 
+# SCRIPT EXPLAINATION
 
-This script is written in **Bash**, a Unix shell scripting language. It interacts with the **GitHub API** to list users with **read access** (permissions to pull) to a specific GitHub repository. Here's a detailed breakdown of each part of the script:
+### This script is written in **Bash**, a Unix shell scripting language. It interacts with the **GitHub API** to list users with **read access** (permissions to pull) to a specific GitHub repository. Here's a detailed breakdown of each part of the script:
 
 ### 1. **#!/bin/bash**
 - **Meaning**: This is called a "shebang." It specifies that the script should be executed using the **bash** shell, which is common for shell scripting.
