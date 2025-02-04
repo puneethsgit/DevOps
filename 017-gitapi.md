@@ -5,7 +5,7 @@ This Bash script interacts with the **GitHub API** to list users who have **read
 ## Prerequisites
 - A **GitHub account**.
 - A **GitHub Personal Access Token (PAT)** with `repo` scope for private repositories.
-- **jq** installed (for parsing JSON responses). Install it using:
+- **jq** installed (for parsing JSON responses). Install it using
   ```bash
   sudo apt-get install jq   # Debian/Ubuntu
   brew install jq           # macOS
