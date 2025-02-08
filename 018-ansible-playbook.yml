@@ -1,0 +1,19 @@
+---
+- name: Install and Start nginx
+  hosts: all  # Apply to all hosts in inventory
+  become: true  # Run tasks with sudo
+
+  tasks:
+    - name: Install nginx using apt module
+      apt:  # Ansible's package manager for Debian-based systems
+        name: nginx
+        state: present
+
+    - name: Install nginx using shell command (Alternative)  # Remove this before running (twice install)
+      shell: apt install -y nginx
+      when: ansible_os_family == "Debian"  # Ensures it runs only on Debian-based systems
+
+    - name: Start nginx
+      service:  # Use the service module to start the service
+        name: nginx
+        state: started
