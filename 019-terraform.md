@@ -170,6 +170,10 @@ terraform destroy
 
 ---
 
+**Note:**
+- aws_instance : This is a Terraform resource type that tells Terraform to create an EC2 instance in AWS. It comes from the AWS provider (hashicorp/aws).
+- app_server : This is the logical name for the resource within Terraform. It helps you reference the resource elsewhere in your Terraform configuration.
+
 ## 🎯 End Goal: Free AWS EC2 Instance Created
 After running these steps, you will have:
 - **A free-tier eligible EC2 instance in AWS**
