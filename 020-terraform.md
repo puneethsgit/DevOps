@@ -46,7 +46,7 @@ variable "aws_region" {
 variable "instance_ami" {
   description = "The AMI ID for the instance"
   type        = string
-  default     = "ami-09a9858973b288bdd"  # Free-tier eligible AMI ID, Check once and update
+  default     = "ami-xxxxxxxx"  # Free-tier eligible AMI ID, Check once and update
 }
 
 variable "instance_type" {
