@@ -38,11 +38,11 @@ cd ~/ansible
 Create `inventory.ini`:
 ```ini
 [webservers]
-server1 ansible_host=192.168.1.10 ansible_user=user
-server2 ansible_host=192.168.1.11 ansible_user=user
+server1 ansible_host=xxx.xxx.x.xx ansible_user=user
+server2 ansible_host=xxx.xxx.x.xxansible_user=user
 
 [dbservers]
-server3 ansible_host=192.168.1.12 ansible_user=user
+server3 ansible_host=xxx.xxx.x.xx ansible_user=user
 ```
 
 ---
