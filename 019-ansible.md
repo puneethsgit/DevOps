@@ -14,7 +14,7 @@ ssh-keygen -t rsa -b 4096
 ```bash
 ssh-copy-id user@target-server
 ```
-If `ssh-copy-id` is unavailable, manually copy the key:
+If `ssh-copy-id` is unavailable, manually copy the key: or you copy using cat cmd and go to authorized_keys and paste it
 ```bash
 cat ~/.ssh/id_rsa.pub | ssh user@target-server "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 ```
