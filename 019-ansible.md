@@ -126,6 +126,124 @@ Create `site.yml`:
 ansible-playbook -i inventory.ini site.yml
 ```
 
+## Another Way to Create Roles
+Another way to create roles in Ansible is by using the `ansible-galaxy` command, which helps set up the directory structure automatically.
+
+### Using `ansible-galaxy`
+Run the following command:
+
+```bash
+ansible-galaxy init nginx
+```
+
+This will create a structured directory like this:
+
+```
+nginx/
+├── defaults
+│   ├── main.yml
+├── files
+├── handlers
+│   ├── main.yml
+├── meta
+│   ├── main.yml
+├── tasks
+│   ├── main.yml
+├── templates
+├── tests
+│   ├── inventory
+│   ├── test.yml
+├── vars
+│   ├── main.yml
+```
+
+### Defining Tasks
+Edit `nginx/tasks/main.yml` to include:
+
+```yaml
+---
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+```
+
+### Applying the Role in a Playbook
+Create `site.yml`:
+
+```yaml
+---
+- name: Setup Web Servers
+  hosts: webservers
+  roles:
+    - nginx
+```
+
+### Running the Playbook
+Execute the playbook with:
+
+```bash
+ansible-playbook -i inventory.ini site.yml
+```
+
+Using `ansible-galaxy init` is the recommended method as it ensures a well-structured role setup.
+
+## What is `inventory.ini`?
+
+The `inventory.ini` file in Ansible is an **inventory file** that defines the hosts and groups of machines that Ansible will manage. The `.ini` extension indicates that it's using the **INI file format**.
+
+### Example `inventory.ini`
+```ini
+[webservers]
+web1.example.com
+web2.example.com
+
+[dbservers]
+db1.example.com
+db2.example.com
+
+[all:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+```
+
+### Alternative Inventory Formats
+Besides `.ini`, Ansible also supports:
+1. **YAML Inventory (`inventory.yml`)**
+   ```yaml
+   all:
+     hosts:
+       web1.example.com:
+       web2.example.com:
+     vars:
+       ansible_user: ubuntu
+       ansible_ssh_private_key_file: ~/.ssh/id_rsa
+   ```
+2. **Dynamic Inventory**
+   - Fetches hosts from cloud providers (AWS, Azure, GCP) dynamically.
+
+### Is `.ini` Required?
+No, mentioning `.ini` is **not required** in the inventory file name. You can name the file anything you want, such as:
+- `inventory`
+- `hosts`
+- `my_inventory.ini`
+- `inventory.yml` (if using YAML format)
+
+By default, Ansible looks for an inventory file named **`inventory`** in the project directory. If your file has a different name, you need to specify it explicitly when running the playbook:
+
+```bash
+ansible-playbook -i my_inventory site.yml
+```
+
+If you're using an **INI-style inventory file**, the `.ini` extension is optional, but it helps indicate the format for readability.
+
+
 ---
 ## Conclusion
 This guide covered:
