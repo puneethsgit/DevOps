@@ -1,4 +1,3 @@
-```md
 
 # 🚀 MERN Stack CI/CD Pipeline with Jenkins, Docker, Kubernetes & Argo CD  
 
