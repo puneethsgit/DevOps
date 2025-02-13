@@ -449,7 +449,3 @@ With this setup:
 This **CI/CD pipeline** helps streamline the development & deployment process for your **MERN stack** application.
 
 
-```
-
----
-
