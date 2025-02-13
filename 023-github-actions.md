@@ -21,7 +21,7 @@ GitHub Actions is a CI/CD tool that automates workflows directly within GitHub. 
      ```yaml
      jobs:
        build:
-         runs-on: ubuntu-latest
+         runs-on: ubuntu-latest #runs-on: windows-latest  # Uses GitHub-hosted Windows runner
          container: node:18
          steps:
            - name: Checkout Code
