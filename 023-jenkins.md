@@ -267,7 +267,7 @@ docker ps -a
 - While the job is running, you will see a container in the list.
 - Once the job is completed, the container is **automatically destroyed** unless specified otherwise.
 
-If you want to keep the container running after the job completes (for debugging), you can modify the **Docker Agent Template** in Jenkins and set **"Run Container in Detached Mode"**.
+If you want to keep the container running after the job completes (for debugging), you can modify the **Docker Agent Template** in Jenkins and set **"Run Container in Detached Mode".
 ---
 
 
