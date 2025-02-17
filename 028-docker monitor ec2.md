@@ -31,17 +31,17 @@ docker ps --format "table {{.Names}}\t{{.Status}}" >> $LOG_FILE 2>&1
 # Check if Node.js container is running
 NODE_CONTAINER="mern-backend"
 if docker ps --format '{{.Names}}' | grep -q "$NODE_CONTAINER"; then
-    echo "✅ Node.js backend container ($NODE_CONTAINER) is running." >> $LOG_FILE
+    echo "Node.js backend container ($NODE_CONTAINER) is running." >> $LOG_FILE
 else
-    echo "❌ ALERT: Node.js backend container ($NODE_CONTAINER) is NOT running!" >> $LOG_FILE
+    echo "ALERT: Node.js backend container ($NODE_CONTAINER) is NOT running!" >> $LOG_FILE
 fi
 
 # Check if MongoDB container is running
 MONGO_CONTAINER="mern-mongodb"
 if docker ps --format '{{.Names}}' | grep -q "$MONGO_CONTAINER"; then
-    echo "✅ MongoDB container ($MONGO_CONTAINER) is running." >> $LOG_FILE
+    echo "MongoDB container ($MONGO_CONTAINER) is running." >> $LOG_FILE
 else
-    echo "❌ ALERT: MongoDB container ($MONGO_CONTAINER) is NOT running!" >> $LOG_FILE
+    echo "ALERT: MongoDB container ($MONGO_CONTAINER) is NOT running!" >> $LOG_FILE
 fi
 
 # Check CPU and Memory usage of the EC2 instance
