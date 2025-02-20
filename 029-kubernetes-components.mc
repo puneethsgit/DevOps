@@ -157,3 +157,70 @@ Like **roads 🛣️** connecting different houses (Pods) in a city (cluster).
 ✅ **etcd** stores cluster state.  
 
 🚀 Let me know if you need more details!
+
+# **Comparison: Kubernetes Components vs. Docker Components**
+
+Both **Kubernetes and Docker** work with containers, but they have different architectures and purposes. Let’s compare their components side by side.
+
+![Kubernetes Cluster Architecture](https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg)
+
+---
+
+## **1️⃣ Control Plane (Kubernetes) vs. Docker Daemon**
+| **Kubernetes Component** | **Equivalent in Docker** | **Purpose** |
+|-------------------------|------------------------|-------------|
+| **API Server (`kube-apiserver`)** | **Docker CLI / REST API** | The **entry point** for managing the cluster (**kubectl** talks to this). |
+| **Scheduler (`kube-scheduler`)** | ❌ Not in Docker | Assigns Pods to Nodes. Docker does not have scheduling (Docker Swarm does). |
+| **Controller Manager (`kube-controller-manager`)** | **Docker Daemon (`dockerd`)** | Ensures desired state of Pods (Docker just runs containers, no controllers). |
+| **etcd (Database)** | **Local JSON file (`/var/lib/docker`)** | Stores cluster state. Docker stores container metadata locally. |
+
+---
+
+## **2️⃣ Worker Node Components vs. Docker Runtime**
+| **Kubernetes Component** | **Equivalent in Docker** | **Purpose** |
+|-------------------------|------------------------|-------------|
+| **Kubelet (`kubelet`)** | **Docker Daemon (`dockerd`)** | Ensures Pods are running properly (Docker Daemon does this for containers). |
+| **Container Runtime (containerd, CRI-O, etc.)** | **Docker Engine (containerd)** | Runs the actual containers. Docker uses `containerd` internally. |
+| **Kube-Proxy (`kube-proxy`)** | **Docker Networking (`docker0` bridge)** | Handles networking between Pods & Services. Docker uses a bridge network. |
+
+---
+
+## **3️⃣ Networking & Load Balancing**
+| **Kubernetes Component** | **Equivalent in Docker** | **Purpose** |
+|-------------------------|------------------------|-------------|
+| **Kube-Proxy (`kube-proxy`)** | **Docker Bridge Network (`docker0`)** | Routes traffic inside the cluster. Docker uses a basic bridge network. |
+| **Ingress Controller** | ❌ Not in Docker | Manages **external traffic** and **TLS termination**. In Docker, you must expose ports manually. |
+| **CNI (Flannel, Calico, etc.)** | **Docker Network Plugins** | Provides advanced networking between containers/nodes. |
+
+---
+
+## **4️⃣ Service Discovery & Storage**
+| **Kubernetes Component** | **Equivalent in Docker** | **Purpose** |
+|-------------------------|------------------------|-------------|
+| **CoreDNS** | ❌ Not in Docker | Provides **DNS resolution** for services. In Docker, you must link containers manually. |
+| **Persistent Volumes (PV/PVC)** | **Docker Volumes** | Provides persistent storage. Docker also has volumes but lacks advanced provisioning. |
+
+---
+
+## **Key Differences Between Kubernetes and Docker**  
+
+| Feature | **Kubernetes** | **Docker** |
+|---------|--------------|------------|
+| **Scope** | Manages clusters of containers across multiple nodes. | Runs containers on a single machine (by default). |
+| **Networking** | Uses `kube-proxy` and CNI for **advanced networking**. | Uses a simple **bridge network** (`docker0`). |
+| **Scaling** | Automatically scales Pods based on demand. | Manual scaling (`docker-compose` or `swarm`). |
+| **Service Discovery** | Uses **CoreDNS** for internal name resolution. | No built-in service discovery (manual linking). |
+| **Storage** | Supports **Persistent Volumes (PV/PVC)** with storage classes. | Uses **Docker volumes**, but no dynamic storage provisioning. |
+| **Orchestration** | Fully automated with controllers, scheduling, and auto-recovery. | Basic orchestration (Docker Compose, Swarm). |
+
+---
+
+## **Summary**
+- **Docker** is great for running containers on a **single machine**.
+- **Kubernetes** is built for **managing multiple containers across multiple machines**.
+- Kubernetes **adds automation**, **scalability**, and **networking** on top of what Docker provides.
+
+🚀 **You can still use Docker to build images and run containers in Kubernetes!**  
+Let me know if you need more details! 😊
+
+
