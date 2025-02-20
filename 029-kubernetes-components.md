@@ -162,7 +162,7 @@ Both **Kubernetes and Docker** work with containers, but they have different arc
 
 ![Kubernetes Cluster Architecture](https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg)
 
-![Docker Architecture](https://www.geeksforgeeks.org/wp-content/uploads/Docker-Architecture.png)
+![Docker Architecture](https://media.geeksforgeeks.org/wp-content/uploads/20221205115118/Architecture-of-Docker.png)
 
 ---
 
