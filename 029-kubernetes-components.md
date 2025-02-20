@@ -156,13 +156,13 @@ Like **roads 🛣️** connecting different houses (Pods) in a city (cluster).
 ✅ **Container Runtime** (containerd, CRI-O) runs containers.  
 ✅ **etcd** stores cluster state.  
 
-🚀 Let me know if you need more details!
-
 # **Comparison: Kubernetes Components vs. Docker Components**
 
 Both **Kubernetes and Docker** work with containers, but they have different architectures and purposes. Let’s compare their components side by side.
 
 ![Kubernetes Cluster Architecture](https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg)
+
+![Docker Architecture](https://www.geeksforgeeks.org/wp-content/uploads/Docker-Architecture.png)
 
 ---
 
@@ -222,5 +222,4 @@ Both **Kubernetes and Docker** work with containers, but they have different arc
 
 🚀 **You can still use Docker to build images and run containers in Kubernetes!**  
 Let me know if you need more details! 😊
-
 
