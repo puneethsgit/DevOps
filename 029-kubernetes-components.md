@@ -161,7 +161,7 @@ Like **roads 🛣️** connecting different houses (Pods) in a city (cluster).
 Both **Kubernetes and Docker** work with containers, but they have different architectures and purposes. Let’s compare their components side by side.
 
 ![Kubernetes Cluster Architecture](https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg)
-
+![Kubernetes Cluster Architecture](https://www.cncf.io/wp-content/uploads/2020/09/Kubernetes-architecture-diagram-1-1-1024x698.png)
 ![Docker Architecture](https://media.geeksforgeeks.org/wp-content/uploads/20221205115118/Architecture-of-Docker.png)
 
 ---
