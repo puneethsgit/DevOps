@@ -62,9 +62,7 @@ spec:
 
 ---
 
-## `README.md`
 
-```markdown
 # Kubernetes Pod and Deployment YAML Files
 
 ## Overview
