@@ -30,7 +30,7 @@ Kubernetes provides different types of services to expose applications running w
 
 For advanced use cases, Kubernetes also provides `Ingress` for managing external access and `ExternalName` for mapping to external services.
 
-#NOTE
+# NOTE
 If you **stop (shut down) your Amazon EKS cluster**, your application’s availability to end users **depends on how it is deployed** and which components are affected.  
 
 ### **1. What Happens When You Stop an EKS Cluster?**
