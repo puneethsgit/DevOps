@@ -1,4 +1,4 @@
-# README: Setting Up and Running Python Web Application on Kubernetes
+# Setting Up and Running Python Web Application on Kubernetes
 
 ## Prerequisites
 
