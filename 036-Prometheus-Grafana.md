@@ -67,9 +67,9 @@ kubectl get svc -n monitoring | grep prometheus-kube-prometheus-prometheus
 ```
 Example output:  
 ```
-prometheus-kube-prometheus-prometheus   NodePort   10.102.39.96   <none>   9090:30638/TCP   10m
+prometheus-kube-prometheus-prometheus   NodePort   XX.XXX.XX.XX   <none>   XXXX:XXXXX/TCP   10m
 ```
-Here, `30638` is the **NodePort**.
+Here, `XXXXX` is the **NodePort**.
 
 ### 🔹 Access Prometheus  
 ```sh
@@ -95,9 +95,9 @@ kubectl get svc -n monitoring | grep prometheus-grafana
 ```
 Example output:  
 ```
-prometheus-grafana   NodePort   10.107.65.65   <none>   80:31014/TCP   20m
+prometheus-grafana   NodePort   XX.XXX.XX.XX   <none>   XX:XXXXX/TCP   20m
 ```
-Here, `31014` is the **NodePort**.
+Here, `XXXXX` is the **NodePort**.
 
 ### 🔹 Access Grafana  
 ```sh
@@ -114,7 +114,7 @@ http://<MINIKUBE-IP>:<NODEPORT>
 
 ### 🔹 Get Admin Password  
 ```sh
-kubectl get secret -n monitoring prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+kubectl get secret -n monitoring prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
 📌 **Default Username:** `admin`  
 
@@ -128,7 +128,7 @@ kubectl get secret -n monitoring prometheus-grafana -o jsonpath="{.data.admin-pa
 4. Select **Prometheus**  
 5. Enter the Prometheus URL:  
    ```
-   http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+   http://<minikubeip>:<prometheus port>
    ```
 6. Click **Save & Test** ✅  
 
