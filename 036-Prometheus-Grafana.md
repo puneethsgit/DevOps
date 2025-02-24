@@ -239,3 +239,19 @@ kubectl patch svc prometheus-kube-state-metrics -n monitoring -p '{"spec": {"typ
 ---
 
 ## 🎉 Congratulations! Your Kubernetes Monitoring is Ready! 🚀  
+
+
+## To Delete
+
+To delete the entire **monitoring** namespace along with all resources inside it (including Prometheus, Grafana, and related components), run:  
+
+```sh
+kubectl delete namespace monitoring
+```
+
+### 🔹 Verify Deletion
+Check if the namespace still exists:
+```sh
+kubectl get namespaces
+```
+
