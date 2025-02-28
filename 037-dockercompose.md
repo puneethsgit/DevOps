@@ -214,6 +214,20 @@ echo "All containers are running. Use 'docker ps' to check."
 docker ps
 ```
 
+### **🚀 Why Use Docker Compose Instead of Scripts?**
+
+| Feature             | Docker Compose (`docker-compose.yml`) | Bash Script (`run_containers.sh`) |
+|--------------------|-----------------------------------|----------------------------------|
+| **Readability**    | Easy YAML format, well-structured | Harder to maintain, long commands |
+| **Reusability**    | Works across different environments | Needs manual tweaks per system |
+| **Dependencies**   | `depends_on` ensures order | You must handle ordering manually |
+| **Scaling**        | `docker-compose up --scale web=5` | Need to write looping logic in script |
+| **Environment Handling** | Supports `.env` files | Need to manually export variables |
+| **Networking**     | Automatically creates a network | Must create a network manually |
+| **Logging**        | Centralized logs (`docker-compose logs`) | Individual `docker logs` per container |
+| **Shutdown & Cleanup** | `docker-compose down` | Requires a separate cleanup script |
+
+
 ### **`cleanup.sh`** (Stops & removes all containers + network)
 ```sh
 #!/bin/bash
