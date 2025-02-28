@@ -265,6 +265,39 @@ echo "All containers are running. Use 'docker ps' to check."
 docker ps
 ```
 
+### **📝 Code Explanation**
+```bash
+echo "Waiting for web services to start..."
+```
+- Prints a message to indicate that we are waiting for the web services to become available.
+
+```bash
+until curl -s http://localhost:81/ &> /dev/null && curl -s http://localhost:82/ &> /dev/null; do
+```
+- `until`: Executes the loop **until** the condition succeeds (i.e., both web services respond).  
+- `curl -s http://localhost:81/`:  
+  - `curl` sends an HTTP request to `http://localhost:81/`.  
+  - `-s` (silent mode) prevents unnecessary output.  
+- `&> /dev/null`: Redirects both **stdout (output)** and **stderr (errors)** to `/dev/null` (hides output).  
+- `&&`: Ensures both `curl` commands **must succeed** before exiting the loop.  
+- If **either service is unreachable**, the loop continues.
+
+```bash
+  sleep 2
+```
+- **Waits for 2 seconds** before retrying (prevents spamming the server).  
+
+```bash
+done
+```
+- **Ends the `until` loop** once both `curl` commands succeed.
+
+```bash
+echo "Web services are ready!"
+```
+- Prints confirmation that the web services are up.
+
+
 ### **🚀 Why Use Docker Compose Instead of Scripts?**
 
 | Feature             | Docker Compose (`docker-compose.yml`) | Bash Script (`run_containers.sh`) |
