@@ -1,7 +1,3 @@
-Here’s your `README.md` with clear instructions:  
-
----
-
 ### **NGINX + Node.js + Redis with Docker Compose**
 This setup uses **NGINX** as a reverse proxy, **Node.js** as the backend, and **Redis** as a caching layer, all managed with **Docker Compose**.
 
