@@ -83,8 +83,10 @@ Create `nginx_setup.yml`:
         name: nginx
         state: started
 ```
-### Using SHELL MODULE
+If you want to use the **shell module** instead of the **apt module** to install and start Nginx, you can modify your playbook like this:  
 
+### **Updated Ansible Playbook using `shell` module**
+```yaml
 ---
 - name: Install and Start Nginx using Shell
   hosts: webservers
@@ -102,6 +104,15 @@ Create `nginx_setup.yml`:
 
     - name: Enable Nginx on boot
       shell: systemctl enable nginx
+```
+
+### **Explanation:**
+1. **Update package list** → Ensures package lists are refreshed before installation.  
+2. **Install Nginx** → Uses `apt install -y nginx` instead of the `apt` module.  
+3. **Start Nginx** → Uses `systemctl start nginx` to start the service.  
+4. **Enable Nginx** → Ensures Nginx starts on boot.  
+
+**Note:** The `apt` module is recommended for package management, but the `shell` module works when you need more control. 🚀 Let me know if you need modifications!
 
 ### Execute Playbook
 ```bash
