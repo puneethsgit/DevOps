@@ -83,6 +83,25 @@ Create `nginx_setup.yml`:
         name: nginx
         state: started
 ```
+### Using SHELL MODULE
+
+---
+- name: Install and Start Nginx using Shell
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Update package list
+      shell: apt update -y
+
+    - name: Install Nginx
+      shell: apt install -y nginx
+
+    - name: Start Nginx
+      shell: systemctl start nginx
+
+    - name: Enable Nginx on boot
+      shell: systemctl enable nginx
 
 ### Execute Playbook
 ```bash
