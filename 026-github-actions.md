@@ -298,3 +298,56 @@ jobs:
 This fully automates the **CI/CD pipeline using GitHub Actions, Docker, and Kubernetes**. 🚀
 
 
+# NOTE
+# Checking Changes in a GitHub Repository
+
+## 1. Using Git in the Terminal
+
+### Check What Has Changed in the Last 2 Days
+```bash
+git log --since="2 days ago" --oneline
+```
+
+### Fetch Latest Changes and Compare
+```bash
+git fetch origin
+git diff origin/main
+```
+
+### Check Commit History with Details
+```bash
+git log --graph --oneline --decorate --all
+```
+
+## 2. Using GitHub Website
+- Open the repository on GitHub.
+- Click on the **"Commits"** section to see all recent commits.
+- Click on **"Pull Requests"** to see any recent PRs merged or updated.
+- Check the **"Insights" → "Code Frequency"** to see changes in lines of code over time.
+
+## 3. Using GitHub CLI (if installed)
+```bash
+gh repo sync
+gh browse
+```
+This will open the repo in the browser where you can check the latest commits.
+
+## 4. Using `git blame` to Track Line Changes
+```bash
+git blame <filename>
+```
+Example:
+```bash
+git blame app.js
+```
+This will show each line of the file along with:
+- The commit hash that last modified the line
+- The author's name
+- The timestamp of the change
+
+### Using GitHub Web UI for Blame
+1. Open the repository on GitHub.
+2. Navigate to the file you want to inspect.
+3. Click the **Blame** button (found at the top-right of the file view).
+4. GitHub will display each line with the corresponding commit and author.
+
