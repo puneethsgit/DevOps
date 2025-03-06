@@ -1,4 +1,4 @@
-GitHub Actions is a CI/CD tool that automates workflows directly within GitHub. It provides cloud-hosted runners to build, test, and deploy applications.
+# GitHub Actions is a CI/CD tool that automates workflows directly within GitHub. It provides cloud-hosted runners to build, test, and deploy applications.
 
 ### **How GitHub Actions Works**
 1. **Workflow Execution:**  
