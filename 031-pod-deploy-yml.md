@@ -369,6 +369,62 @@ Yes, you're right! **With Kops, you only pay for the resources**, but **with EKS
 
 Let me know if you need more details! 🚀
 
+### **Can You Use Docker Compose with Kubernetes?**  
+✅ **Yes!** But **Docker Compose** is designed for **single-host container orchestration**, while **Kubernetes** is meant for **multi-node, production-grade deployments**. However, you can convert Docker Compose files to Kubernetes YAML files.
+
+---
+
+## **1️⃣ Option 1: Use Kompose (Convert Docker Compose to Kubernetes)**
+Kompose is a tool that automatically converts **docker-compose.yml** to Kubernetes manifests.
+
+### **🔹 Install Kompose**
+```sh
+curl -L https://github.com/kubernetes/kompose/releases/download/v1.30.0/kompose-linux-amd64 -o kompose
+chmod +x kompose
+sudo mv kompose /usr/local/bin/
+```
+
+### **🔹 Convert `docker-compose.yml` to Kubernetes YAML**
+```sh
+kompose convert
+```
+👉 This generates **Deployment, Service, and ConfigMap YAML files**.
+
+### **🔹 Deploy to Kubernetes**
+```sh
+kubectl apply -f .
+```
+👉 Deploys the converted files to your Kubernetes cluster.
+
+---
+
+## **2️⃣ Option 2: Use Docker Compose with Kubernetes Directly**
+Docker Desktop has a **built-in Kubernetes integration**, allowing you to run **docker-compose.yml** inside Kubernetes.
+
+### **🔹 Enable Kubernetes in Docker Desktop**
+1. Open **Docker Desktop**.
+2. Go to **Settings > Kubernetes**.
+3. Click **Enable Kubernetes**.
+
+### **🔹 Deploy a Docker Compose File to Kubernetes**
+```sh
+docker stack deploy -c docker-compose.yml my-app
+```
+👉 This runs the Compose file as a **Kubernetes stack**.
+
+---
+
+## **🚀 Which Method Should You Use?**
+| Approach | Best For | Pros | Cons |
+|----------|---------|------|------|
+| **Kompose** | Migrating apps from Docker Compose to Kubernetes | Automatic conversion | May require manual edits |
+| **Docker Stack (Docker Desktop)** | Running Compose in Kubernetes locally | Simple, no conversion needed | Only works in Docker Desktop |
+
+✅ **For real Kubernetes environments (Minikube, EKS, etc.), use Kompose.**  
+✅ **For local development with Docker Desktop, use `docker stack deploy`.**
+
+Do you want help converting your **Docker Compose** file to **Kubernetes**? 🚀
+
 # Understanding `pod.yml` and `deployment.yml`
 
 ## `pod.yml`
