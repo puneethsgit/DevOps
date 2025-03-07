@@ -88,6 +88,81 @@ kubectl get pods --field-selector spec.nodeName=<NODE_NAME>
 
 Let me know if you need more details! 🚀
 
+### **Can You Use `kubectl` for EKS or Kops?**  
+✅ **Yes!** You can use `kubectl` for both **EKS** (AWS-managed Kubernetes) and **Kops** (self-managed Kubernetes).  
+
+---
+
+### **1️⃣ Using `kubectl` with EKS**
+EKS is a **managed Kubernetes service** by AWS, and `kubectl` is used to interact with it.
+
+#### **🔹 Steps to Use `kubectl` with EKS:**
+1️⃣ **Configure `kubectl` to connect to EKS**  
+   ```sh
+   aws eks update-kubeconfig --region <AWS_REGION> --name <EKS_CLUSTER_NAME>
+   ```
+   Example:
+   ```sh
+   aws eks update-kubeconfig --region us-east-1 --name my-eks-cluster
+   ```
+
+2️⃣ **Check if the connection is successful**  
+   ```sh
+   kubectl get nodes
+   ```
+
+3️⃣ **Now you can use all `kubectl` commands**, such as:  
+   ```sh
+   kubectl get pods
+   kubectl describe deployments
+   kubectl logs <POD_NAME>
+   ```
+
+✅ **EKS supports `kubectl` by default** since it's a fully managed Kubernetes cluster.
+
+---
+
+### **2️⃣ Using `kubectl` with Kops**
+Kops sets up a **self-managed Kubernetes cluster** in AWS (or another cloud). Since it's a standard Kubernetes cluster, `kubectl` works with it.
+
+#### **🔹 Steps to Use `kubectl` with Kops:**
+1️⃣ **Export the cluster configuration from Kops**
+   ```sh
+   export KUBECONFIG=~/.kube/config
+   ```
+
+2️⃣ **Verify cluster connection**
+   ```sh
+   kubectl cluster-info
+   ```
+
+3️⃣ **Use `kubectl` commands normally**
+   ```sh
+   kubectl get nodes
+   kubectl get pods -A
+   kubectl delete pod <POD_NAME>
+   ```
+
+✅ **Kops also supports `kubectl`** because it deploys a standard Kubernetes cluster.
+
+---
+
+### **3️⃣ Key Differences When Using `kubectl`**
+| Feature | **EKS** (AWS Managed) | **Kops** (Self-Managed) |
+|---------|-----------------|-----------------|
+| **Cluster Creation** | AWS manages the control plane | You set up & manage everything |
+| **kubectl Setup** | Uses `aws eks update-kubeconfig` | Uses `export KUBECONFIG` |
+| **Management** | Easier (AWS handles upgrades & HA) | More control, but manual management |
+| **kubectl Usage** | Fully supported | Fully supported |
+
+---
+
+### **4️⃣ Conclusion: Can You Use `kubectl` for EKS & Kops?**
+✅ **YES!** `kubectl` works with both EKS and Kops, but the setup process is different.  
+- **For EKS** → Use `aws eks update-kubeconfig`  
+- **For Kops** → Use `export KUBECONFIG`  
+
+Let me know if you need help setting it up! 🚀
 
 
 What is a Namespace in Minikube? Does It Mean a Cluster?
