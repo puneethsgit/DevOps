@@ -1,5 +1,57 @@
 # K8S
 
+Difference Between kubectl get pods and kubectl get nodes
+Command	Purpose
+kubectl get pods	Lists all pods running in the cluster.
+kubectl get nodes	Lists all nodes (worker & master) in the cluster.
+1️⃣ kubectl get pods → Shows Running Pods
+sh
+Copy
+Edit
+kubectl get pods
+🔹 Lists all pods in the default namespace.
+🔹 A pod is the smallest unit in Kubernetes that runs one or more containers.
+
+Example Output:
+sql
+Copy
+Edit
+NAME         READY   STATUS    RESTARTS   AGE
+nginx-abc    1/1     Running   0          5m
+app-backend  2/2     Running   1          10m
+db-mongo     1/1     Pending   0          3m
+NAME → Pod name
+READY → Number of running containers in the pod
+STATUS → Running, Pending, Completed, or Error
+RESTARTS → Number of times the pod has restarted
+AGE → Time since the pod was created
+✅ Useful for checking which applications are running in your cluster.
+
+2️⃣ kubectl get nodes → Shows Cluster Nodes
+sh
+Copy
+Edit
+kubectl get nodes
+🔹 Lists all worker & master nodes in the Kubernetes cluster.
+🔹 A node is a physical/virtual machine that runs pods.
+
+Example Output:
+pgsql
+Copy
+Edit
+NAME          STATUS   ROLES    AGE     VERSION
+minikube      Ready    master   10h     v1.28.0
+worker-node1  Ready    <none>   5h      v1.28.0
+worker-node2  Ready    <none>   3h      v1.28.0
+NAME → Node name
+STATUS → Ready (accepting pods), NotReady, SchedulingDisabled, etc.
+ROLES → master (control plane), worker, or <none> (default worker)
+AGE → How long the node has been active
+VERSION → Kubernetes version running on the node
+✅ Useful for checking cluster health and node availability.
+
+
+
 What is a Namespace in Minikube? Does It Mean a Cluster?
 No, a namespace is NOT a cluster. Instead, it is a logical partition inside a Kubernetes cluster that helps organize and isolate resources.
 
