@@ -1,54 +1,92 @@
 # K8S
 
-Difference Between kubectl get pods and kubectl get nodes
-Command	Purpose
-kubectl get pods	Lists all pods running in the cluster.
-kubectl get nodes	Lists all nodes (worker & master) in the cluster.
-1️⃣ kubectl get pods → Shows Running Pods
-sh
-Copy
-Edit
-kubectl get pods
-🔹 Lists all pods in the default namespace.
-🔹 A pod is the smallest unit in Kubernetes that runs one or more containers.
+Kubernetes is an open-source platform that automates the deployment, management, and scaling of containerized applications. It's also known as "k8s". 
 
-Example Output:
-sql
-Copy
-Edit
+### **Difference Between `kubectl get pods` and `kubectl get nodes`**  
+
+| Command                 | Purpose |
+|------------------------|---------|
+| `kubectl get pods`     | Lists all **pods** running in the cluster. |
+| `kubectl get nodes`    | Lists all **nodes** (worker & master) in the cluster. |
+
+---
+
+### **1️⃣ `kubectl get pods` → Shows Running Pods**
+```sh
+kubectl get pods
+```
+🔹 **Lists all pods** in the **default namespace**.  
+🔹 A **pod** is the smallest unit in Kubernetes that runs **one or more containers**.  
+
+#### **Example Output:**
+```
 NAME         READY   STATUS    RESTARTS   AGE
 nginx-abc    1/1     Running   0          5m
 app-backend  2/2     Running   1          10m
 db-mongo     1/1     Pending   0          3m
-NAME → Pod name
-READY → Number of running containers in the pod
-STATUS → Running, Pending, Completed, or Error
-RESTARTS → Number of times the pod has restarted
-AGE → Time since the pod was created
-✅ Useful for checking which applications are running in your cluster.
+```
+- **NAME** → Pod name  
+- **READY** → Number of running containers in the pod  
+- **STATUS** → Running, Pending, Completed, or Error  
+- **RESTARTS** → Number of times the pod has restarted  
+- **AGE** → Time since the pod was created  
 
-2️⃣ kubectl get nodes → Shows Cluster Nodes
-sh
-Copy
-Edit
+✅ **Useful for** checking **which applications are running** in your cluster.
+
+---
+
+### **2️⃣ `kubectl get nodes` → Shows Cluster Nodes**
+```sh
 kubectl get nodes
-🔹 Lists all worker & master nodes in the Kubernetes cluster.
-🔹 A node is a physical/virtual machine that runs pods.
+```
+🔹 **Lists all worker & master nodes** in the Kubernetes cluster.  
+🔹 A **node** is a **physical/virtual machine** that runs **pods**.  
 
-Example Output:
-pgsql
-Copy
-Edit
+#### **Example Output:**
+```
 NAME          STATUS   ROLES    AGE     VERSION
 minikube      Ready    master   10h     v1.28.0
 worker-node1  Ready    <none>   5h      v1.28.0
 worker-node2  Ready    <none>   3h      v1.28.0
-NAME → Node name
-STATUS → Ready (accepting pods), NotReady, SchedulingDisabled, etc.
-ROLES → master (control plane), worker, or <none> (default worker)
-AGE → How long the node has been active
-VERSION → Kubernetes version running on the node
-✅ Useful for checking cluster health and node availability.
+```
+- **NAME** → Node name  
+- **STATUS** → `Ready` (accepting pods), `NotReady`, `SchedulingDisabled`, etc.  
+- **ROLES** → `master` (control plane), `worker`, or `<none>` (default worker)  
+- **AGE** → How long the node has been active  
+- **VERSION** → Kubernetes version running on the node  
+
+✅ **Useful for** checking **cluster health and node availability**.
+
+---
+
+### **3️⃣ Key Differences**
+| Feature | `kubectl get pods` | `kubectl get nodes` |
+|---------|-----------------|----------------|
+| **Lists** | Pods (running applications) | Nodes (machines running the cluster) |
+| **Scope** | Application-level | Infrastructure-level |
+| **Used For** | Checking application health | Checking cluster health |
+| **Shows** | Containers running in a pod | Machines running Kubernetes |
+| **Status Types** | Running, Pending, CrashLoopBackOff, etc. | Ready, NotReady, SchedulingDisabled, etc. |
+
+---
+
+### **4️⃣ Bonus: Extra Commands**
+✅ **Get pods in all namespaces**  
+```sh
+kubectl get pods --all-namespaces
+```
+
+✅ **Get more details about nodes**  
+```sh
+kubectl describe nodes
+```
+
+✅ **Get pods on a specific node**  
+```sh
+kubectl get pods --field-selector spec.nodeName=<NODE_NAME>
+```
+
+Let me know if you need more details! 🚀
 
 
 
