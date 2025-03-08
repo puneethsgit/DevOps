@@ -532,6 +532,29 @@ Verify the new replica count:
 kubectl get deployments
 ```
 
+No, running:  
+```sh
+kubectl scale deployment nginx-deployment --replicas=5
+```
+**will not update the `deployment.yaml` file.**  
+
+It only updates the **live state** of the Deployment in the Kubernetes cluster but does not modify the **YAML manifest file** stored on your local system or Git repository.  
+
+### If you apply the original `deployment.yaml` again:
+```sh
+kubectl apply -f deployment.yaml
+```
+Kubernetes will **reset the replicas to 3** because the YAML file still has `replicas: 3`.
+
+### How to persist the change?
+To make the change permanent, you need to **manually edit** the YAML file or use:
+```sh
+kubectl edit deployment nginx-deployment
+```
+This opens an editor where you can update the `replicas` count, and once you save, it persists in the cluster.
+
+Let me know if you need more details! 🚀
+
 ### 4. Delete Resources
 To delete the Pod:
 ```sh
@@ -547,5 +570,4 @@ kubectl delete -f deployment.yml
 - **Use `deployment.yml`** for scalable and resilient applications.
 
 This setup helps manage applications efficiently within Kubernetes.
-```
 
