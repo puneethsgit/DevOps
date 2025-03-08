@@ -213,6 +213,7 @@ To allow VPA to scale replicas along with resource limits, you can modify the de
 ```sh
 kubectl scale deployment python-app --replicas=5
 ```
+While VPA modifies CPU/memory, you can still manually increase replicas for better availability.
 
 ---
 
