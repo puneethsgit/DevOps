@@ -5,6 +5,159 @@
 This document explains how Kubernetes **Ingress** and **Services** work together to route external traffic to **Pods**, ensuring efficient traffic management and cost optimization.
 
 ---
+### **Setup Guide: Installing Nginx Ingress Controller on Minikube**  
+
+In a **Minikube** cluster, Nginx Ingress does **not** come pre-installed. You must enable and configure it manually. Follow this step-by-step guide to set up the **Nginx Ingress Controller** on Minikube.  
+
+---
+
+## **Step 1: Start Minikube**
+Ensure your Minikube cluster is running. If not, start it with:  
+```sh
+minikube start
+```
+Check if Minikube is active:
+```sh
+kubectl get nodes
+```
+
+---
+
+## **Step 2: Enable the Nginx Ingress Controller**
+Minikube has a built-in addon for Nginx Ingress. Enable it using:
+```sh
+minikube addons enable ingress
+```
+Verify the Ingress Controller is running:
+```sh
+kubectl get pods -n kube-system | grep ingress
+```
+Expected output:
+```
+ingress-nginx-controller-xxxxx  Running
+```
+
+---
+
+## **Step 3: Verify the Ingress Controller Service**
+Check the service type:
+```sh
+kubectl get svc -n kube-system | grep ingress
+```
+You should see a service like this:
+```
+ingress-nginx-controller   NodePort    <IP>   <Port>
+```
+By default, **Minikube uses NodePort**, but you can change it and now we have installed Ingress Controller that is nginx and Ingress resource that is Ingress.yaml will auto synced as well means nginx.config -> ingress configure , Kubectl get ingress -> YOU CAN SEE IP ADDRESS (Before address field was empty without nginx ingress controller) This enough in your production environment but if your trying in local K8S cluster vim /etc/hosts -> You need mention domain name to IP address (Ingress IP address) REFER NOTES
+
+---
+
+## **Step 4: Deploy a Test Application**
+Create a simple **deployment and service** to test the Ingress.
+
+### **Deployment**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: hashicorp/http-echo
+        args:
+          - "-text=Hello from My App!"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+```
+Apply it:
+```sh
+kubectl apply -f my-app.yaml
+```
+
+---
+
+## **Step 5: Create an Ingress Resource**
+Now, create an **Ingress rule** to expose the app using a domain name.
+
+### **Ingress Configuration**
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: myapp.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-app-service
+            port:
+              number: 80
+```
+Apply the Ingress:
+```sh
+kubectl apply -f ingress.yaml
+```
+
+---
+
+## **Step 6: Test the Ingress**
+### **Get the Minikube IP**
+Since Minikube does not provide an external LoadBalancer, get the IP manually:
+```sh
+minikube ip
+```
+Suppose it returns `192.168.49.2`.
+
+### **Modify `/etc/hosts`**
+To access the service via `myapp.local`, add the following entry to your **local machine’s** `/etc/hosts` (Linux/Mac) or `C:\Windows\System32\drivers\etc\hosts` (Windows):
+```
+192.168.49.2  myapp.local
+```
+
+Now, test the setup in a browser or using `curl`:
+```sh
+curl http://myapp.local
+```
+Expected output:
+```
+Hello from My App!
+```
+
+---
+
+## **Conclusion**
+You have successfully installed and configured **Nginx Ingress on Minikube**. 🚀 Now, you can use **host-based routing** and **path-based routing** efficiently within your cluster.  
+
+Would you like to explore **TLS (HTTPS) setup** for your Ingress? 🔐
 
 ## **1️⃣ What is Kubernetes Ingress?**
 **Ingress** is a Kubernetes resource that manages external access to services inside the cluster, typically via HTTP/HTTPS. It allows you to:
