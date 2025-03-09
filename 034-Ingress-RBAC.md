@@ -130,17 +130,24 @@ kubectl apply -f ingress.yaml
 ---
 
 ## **Step 6: Test the Ingress**
-### **Get the Minikube IP**
+### **Get the Minikube P**
 Since Minikube does not provide an external LoadBalancer, get the IP manually:
 ```sh
 minikube ip
 ```
-Suppose it returns `192.168.49.2`.
+Suppose it returns `192.168.4x.2`. You need to use the Minikube IP, not the Ingress IP. But in some cases  In my case, both the Minikube IP and the Ingress Address are the same (192.168.4x.2). This means that Minikube has correctly assigned its IP to the Ingress.
+
+Why Are They the Same?
+Minikube automatically routes Ingress traffic through its IP.
+In Minikube, the Nginx Ingress Controller runs as a NodePort service, and Minikube maps its IP (minikube ip) to that service.
+The kubectl get ingress command shows the same IP because Minikube sets up internal networking to use its main IP.
+
+
 
 ### **Modify `/etc/hosts`**
 To access the service via `myapp.local`, add the following entry to your **local machine’s** `/etc/hosts` (Linux/Mac) or `C:\Windows\System32\drivers\etc\hosts` (Windows):
 ```
-192.168.49.2  myapp.local
+192.168.4x.2  myapp.local
 ```
 
 Now, test the setup in a browser or using `curl`:
