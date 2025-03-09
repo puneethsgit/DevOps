@@ -887,7 +887,86 @@ Your understanding of how **TLS session keys** work is correct. Now, let's see w
 
 
 
-### **Types of SSL/TLS Termination Methods**  
+### **TLS vs. SSL: What’s the Difference?**  
+
+**TLS (Transport Layer Security) and SSL (Secure Sockets Layer) are both cryptographic protocols used for secure communication over the internet.** TLS is the successor to SSL, offering improved security and performance.  
+
+---
+
+## **🔹 Key Differences Between TLS and SSL**
+| Feature | **SSL (Secure Sockets Layer)** | **TLS (Transport Layer Security)** |
+|---------|-------------------------------|-----------------------------------|
+| **Latest Version** | SSL 3.0 (deprecated) | TLS 1.3 (latest, recommended) |
+| **Security** | Vulnerable to attacks (e.g., POODLE, BEAST) | Stronger encryption and better security |
+| **Handshake Speed** | Slower | Faster handshake |
+| **Session Resumption** | Limited | Supports 0-RTT resumption (TLS 1.3) |
+| **Cipher Suites** | Uses weaker ciphers (e.g., RC4, MD5) | Uses stronger ciphers (e.g., AES-GCM, ChaCha20) |
+| **Key Exchange** | Uses RSA, which is slow and less secure | Uses ECDHE (Elliptic Curve Diffie-Hellman) for Perfect Forward Secrecy (PFS) |
+| **Usage** | Deprecated (not used anymore) | Actively used in HTTPS, email security, VPNs, etc. |
+
+---
+
+## **🔹 Why Was SSL Replaced by TLS?**
+- **SSL had multiple security vulnerabilities**, making it unsafe for modern applications.
+- **TLS introduced stronger encryption algorithms** and **faster handshake mechanisms**.
+- **SSL 2.0 and SSL 3.0 are completely deprecated**, and even **TLS 1.0 & TLS 1.1 were deprecated in 2020**.
+- **Today, only TLS 1.2 and TLS 1.3 are considered secure and recommended.**
+
+---
+
+## **🔹 How Do TLS and SSL Work in HTTPS Communication?**
+1. **Client (Browser) initiates an HTTPS connection** to the server.
+2. **TLS/SSL Handshake begins:**
+   - The server sends its **TLS/SSL certificate** (which includes its public key).
+   - The client verifies the certificate (issued by a trusted CA like Let's Encrypt).
+   - The client generates a **session key** and encrypts it using the **server’s public key**.
+   - The session key is sent to the server, and the **server decrypts it using its private key**.
+   - Now both client & server have the same **session key** for encryption.
+3. **Client and server use the session key for symmetric encryption** to exchange data securely.
+
+💡 **With TLS 1.3, this process is much faster due to 0-RTT (Zero Round Trip Time) resumption.**
+
+---
+
+## **🔹 Should You Use SSL or TLS?**
+🔴 **DO NOT use SSL (deprecated, insecure).**  
+🟢 **Use TLS 1.2 or TLS 1.3 for secure communications.**  
+✅ **TLS 1.3 is the most secure and fastest option today.**  
+
+---
+
+Yes, today no one uses **SSL** because it is **deprecated and insecure**. Instead, **TLS (Transport Layer Security) is used everywhere** for securing communications.  
+
+Even when we talk about **SSL Offloading, SSL Bridging, or SSL Passthrough**, we are actually referring to **TLS** but using the older term "SSL" out of habit.  
+
+---
+
+### **🔹 What Happens in TLS Offloading, Bridging, and Passthrough?**
+Although they are called **SSL Offloading, SSL Bridging, and SSL Passthrough**, they actually refer to **TLS encryption and decryption** in modern systems. Let's break them down:
+
+| **Method** | **Who Handles TLS?** | **Decryption at Load Balancer?** | **Encryption to Backend?** | **Use Case** |
+|------------|----------------------|----------------------------------|---------------------------|--------------|
+| **TLS Offloading (Termination)** | Load Balancer (Ingress Controller) | ✅ Yes | ❌ No (Plain HTTP to backend) | Reduces backend CPU load |
+| **TLS Passthrough** | Backend Service | ❌ No | ✅ Yes (End-to-End TLS) | Strict security, backend must handle TLS |
+| **TLS Bridging** | Load Balancer (Ingress) | ✅ Yes | ✅ Yes (Re-encrypts to backend) | Secure but needs more processing power |
+
+---
+
+### **🔹 Why Do We Still Say "SSL Offloading" Instead of "TLS Offloading"?**
+- The term **"SSL" is widely used in old documentation and tools**, even though we actually mean **TLS**.
+- Many companies still call their certificates "**SSL Certificates**," even though they use **TLS encryption**.
+
+💡 **In reality, today we should be saying "TLS Offloading," "TLS Passthrough," and "TLS Bridging," but the term "SSL" has stuck for historical reasons.**
+
+---
+
+### **🔹 So, What Should You Use Today?**
+✅ **Use TLS (not SSL).**  
+✅ **Use TLS 1.2 or TLS 1.3** (TLS 1.3 is the best).  
+✅ **If your backend does not need encryption, use TLS Offloading.**  
+✅ **If strict security is required, use TLS Passthrough (end-to-end encryption).**  
+
+# **Types of SSL/TLS Termination Methods (here also SSL methods explaination refer to TLS)**  
 When securing applications with TLS (SSL), there are three common ways to handle encryption in a load balancer or reverse proxy:  
 
 | **Method**        | **Who Handles SSL?**  | **Decryption at Load Balancer?** | **Encryption to Backend?** |
