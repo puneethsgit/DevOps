@@ -482,4 +482,104 @@ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 2. **Cipher Suite** → Defines **how** encryption and authentication happen.  
 3. **Both are essential** for HTTPS security!  
 
+# ----------------------------------------------------------------------------------------
 
+### **Interview Answer: What Happens When You Enter `www.hashedin.com` in a Browser?**  
+
+#### 🚀 **Step-by-Step Process Explanation**  
+
+When you type `www.hashedin.com` in a web browser and press **Enter**, the following processes occur:
+
+---
+
+## **1️⃣ DNS Resolution (Finding the IP Address)**  
+1. The **browser checks the cache** to see if it already knows the IP address of `www.hashedin.com`.  
+   - Browser Cache → OS Cache → Local DNS Server → ISP DNS Server  
+2. If the IP is not cached, the **DNS query** is sent to the **DNS resolver** (provided by ISP or public resolvers like Google DNS `8.8.8.8`).  
+3. The resolver contacts the **root DNS servers**, then the **TLD (Top-Level Domain) DNS servers** (`.com`), and finally the **authoritative DNS server** for `hashedin.com`.  
+4. The authoritative DNS server responds with the **IP address** (e.g., `203.0.113.10`).  
+
+✅ **Now the browser knows the IP address of `www.hashedin.com`.**
+
+---
+
+## **2️⃣ TCP 3-Way Handshake (Establish Connection)**  
+Since `www.hashedin.com` uses HTTPS, the browser establishes a **TCP connection** with the server:  
+
+1. **Client → SYN → Server** (Client sends a SYN packet to start connection)  
+2. **Server → SYN-ACK → Client** (Server acknowledges and sends SYN-ACK)  
+3. **Client → ACK → Server** (Client acknowledges, connection is established)  
+
+✅ **Now a reliable connection is established between the browser and the server.**  
+
+---
+
+## **3️⃣ TLS/SSL Handshake (Secure the Connection)**  
+Since `www.hashedin.com` is **HTTPS**, a **TLS handshake** is performed to encrypt the connection:  
+
+1. **Client Hello**:  
+   - Browser sends **supported TLS version**, **cipher suites**, and **random number**.  
+2. **Server Hello**:  
+   - Server responds with **chosen cipher suite**, **its TLS certificate**, and another **random number**.  
+3. **Certificate Validation**:  
+   - Browser verifies if the **SSL certificate** is issued by a trusted **Certificate Authority (CA)**.  
+4. **Key Exchange**:  
+   - Server and client exchange a **pre-master key** to generate a **session key**.  
+5. **Session Key Established**:  
+   - Both client and server now use this **shared session key** for encryption.  
+
+✅ **Now, all communication is encrypted using TLS.**  
+
+---
+
+## **4️⃣ HTTP Request & Response (Fetching the Web Page)**  
+1. **Client Request (GET Request)**  
+   - Browser sends an **HTTP GET request**:  
+     ```http
+     GET / HTTP/1.1  
+     Host: www.hashedin.com  
+     User-Agent: Mozilla/5.0  
+     Accept: text/html  
+     ```  
+2. **Server Processes Request**  
+   - The server (running on **NGINX/Apache/Tomcat**) receives the request and processes it.  
+   - If the site is dynamic (React, Angular, or backend like Node.js, Python), the request may be processed by an **application server**.  
+3. **Server Response**  
+   - The server responds with the requested **HTML page** and assets (CSS, JavaScript, images).  
+   - Example response:  
+     ```http
+     HTTP/1.1 200 OK  
+     Content-Type: text/html  
+     Content-Length: 4520  
+     ```  
+
+✅ **Now the browser has received the web page data.**
+
+---
+
+## **5️⃣ Rendering the Web Page**  
+1. **Parsing HTML** → The browser reads the **HTML structure**.  
+2. **Fetching Assets** → Downloads **CSS, JavaScript, and images**.  
+3. **Executing JavaScript** → Runs scripts for interactivity.  
+4. **Layout & Rendering** → The browser applies CSS and displays content on the screen.  
+
+✅ **Now you see the `www.hashedin.com` homepage on your browser!** 🎉  
+
+---
+
+## **Interview Tips: How to Answer in a Structured Way**  
+
+💡 **Use the following structure to answer in an interview:**  
+
+🔹 **Step 1: DNS Resolution** – How the domain name is converted to an IP address.  
+🔹 **Step 2: TCP 3-Way Handshake** – Establishing a reliable connection.  
+🔹 **Step 3: TLS/SSL Handshake** – Securing the communication.  
+🔹 **Step 4: HTTP Request & Response** – How the server processes the request.  
+🔹 **Step 5: Rendering the Web Page** – How the browser displays the content.  
+
+📌 **Example Answer in an Interview:**  
+*"When I enter `www.hashedin.com`, the browser first resolves the domain name using DNS. Once the IP address is found, it establishes a TCP connection using a 3-way handshake. Since HTTPS is used, a TLS handshake occurs to encrypt communication. The browser then sends an HTTP GET request, and the web server responds with the HTML page. Finally, the browser parses the HTML, loads CSS & JavaScript, and renders the page for the user."*  
+
+🔹 **Keep your answer structured and precise!**  
+
+Would you like me to add a **diagram** for better understanding? 🚀
