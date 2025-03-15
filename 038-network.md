@@ -582,4 +582,189 @@ Since `www.hashedin.com` is **HTTPS**, a **TLS handshake** is performed to encry
 
 🔹 **Keep your answer structured and precise!**  
 
-Would you like me to add a **diagram** for better understanding? 🚀
+### **How the OSI Model is Involved When Entering `www.hashedin.com`?**  
+
+When you enter `www.hashedin.com` in a browser, the entire process involves all **7 layers of the OSI model**. Below is a breakdown of how each OSI layer plays a role:  
+
+---
+
+## **OSI Model and Web Request Breakdown**  
+
+### **1️⃣ Application Layer (Layer 7) – User Interaction & Protocols**  
+**Protocols:** HTTP, HTTPS, DNS, TLS  
+- The browser initiates a **DNS request** to resolve `www.hashedin.com`.  
+- It then sends an **HTTP GET request** to fetch the webpage.  
+- If HTTPS is used, it triggers the **TLS handshake**.  
+
+---
+
+### **2️⃣ Presentation Layer (Layer 6) – Data Encryption & Formatting**  
+**Protocols:** SSL/TLS, MIME, ASCII  
+- TLS encrypts the **HTTP request & response** so that communication remains secure.  
+- If compression is used (e.g., Gzip), this layer also handles data compression.  
+
+---
+
+### **3️⃣ Session Layer (Layer 5) – Managing Connections**  
+**Protocols:** TLS/SSL, NetBIOS, RPC  
+- The **TLS handshake** establishes a **secure session** between the client and server.  
+- This layer ensures that multiple requests in a session (e.g., multiple page loads) are handled properly.  
+
+---
+
+### **4️⃣ Transport Layer (Layer 4) – Reliable Data Transfer**  
+**Protocols:** TCP, UDP  
+- The **TCP 3-Way Handshake** occurs here (SYN, SYN-ACK, ACK).  
+- Ensures that data is transmitted reliably and in order.  
+- Uses **port numbers** to direct traffic (e.g., HTTPS → Port `443`).  
+
+---
+
+### **5️⃣ Network Layer (Layer 3) – Routing & IP Addressing**  
+**Protocols:** IP, ICMP, ARP  
+- Converts the **domain name (`www.hashedin.com`) into an IP address** using DNS.  
+- The **IP packet** is created and forwarded through routers to the destination web server.  
+- Handles **routing** to ensure the request reaches the correct server.  
+
+---
+
+### **6️⃣ Data Link Layer (Layer 2) – MAC Address & Frame Transfer**  
+**Protocols:** Ethernet, Wi-Fi, PPP  
+- Converts **IP packets into Ethernet frames** to be sent over the network.  
+- Uses **MAC addresses** to send data from your computer to the router.  
+- If using Wi-Fi, this layer uses the **802.11 Wi-Fi protocol**.  
+
+---
+
+### **7️⃣ Physical Layer (Layer 1) – Transmission of Data as Electrical Signals**  
+**Protocols:** Ethernet Cables, Wi-Fi, Fiber Optics  
+- Converts digital data into **electrical signals (wired)** or **radio waves (wireless)**.  
+- Transmits data through **network cables, fiber optics, or wireless signals**.  
+
+---
+
+## **🚀 OSI Model in Action for `www.hashedin.com`**
+| **OSI Layer** | **Function in Web Request** | **Example Protocols** |
+|-------------|------------------|----------------|
+| **7 - Application** | Sends HTTP/HTTPS request | HTTP, DNS, TLS |
+| **6 - Presentation** | Encrypts data using TLS | TLS, SSL, ASCII |
+| **5 - Session** | Manages session connections | TLS, NetBIOS |
+| **4 - Transport** | Ensures reliable delivery | TCP, UDP |
+| **3 - Network** | Routes packets to the server | IP, ICMP |
+| **2 - Data Link** | Sends data using MAC addresses | Ethernet, Wi-Fi |
+| **1 - Physical** | Converts data into signals | Fiber, Copper, Radio Waves |
+
+---
+
+## **🎯 Interview Tip: How to Answer This in an Interview?**
+📌 **Example Answer:**  
+*"When I enter `www.hashedin.com`, all 7 OSI layers are involved. The Application layer handles the HTTP request, the Presentation layer encrypts it using TLS, and the Session layer manages the connection. The Transport layer ensures reliable communication using TCP, while the Network layer routes packets using IP. The Data Link layer transfers data via MAC addresses, and finally, the Physical layer sends the data as electrical signals over cables or Wi-Fi."*  
+
+✅ **This structured answer shows a deep understanding of networking concepts!**  
+
+Would you like a **diagram** for better visualization? 🚀
+
+Here’s a **diagram** showing how the **OSI Model** is involved when you enter `www.hashedin.com` in a browser:  
+
+---
+
+### **📌 OSI Model in Action – Request Flow for `www.hashedin.com`**
+```
++--------------------------+-----------------------------------------+
+| OSI Layer                | What Happens in Web Request            |
++--------------------------+-----------------------------------------+
+| 7. Application Layer     | Browser sends HTTP/HTTPS request       |
+|                          | DNS request to resolve domain          |
+|                          | TLS handshake starts (if HTTPS)        |
++--------------------------+-----------------------------------------+
+| 6. Presentation Layer    | TLS encrypts request & response        |
+|                          | Data formatting (HTML, JSON, etc.)     |
++--------------------------+-----------------------------------------+
+| 5. Session Layer         | TLS session established                |
+|                          | Handles multiple requests per session  |
++--------------------------+-----------------------------------------+
+| 4. Transport Layer       | TCP 3-way handshake (SYN, SYN-ACK, ACK)|
+|                          | Port numbers used (HTTPS → 443)        |
++--------------------------+-----------------------------------------+
+| 3. Network Layer         | IP address resolved via DNS            |
+|                          | Packet routing across networks         |
++--------------------------+-----------------------------------------+
+| 2. Data Link Layer       | Frames created with MAC address        |
+|                          | Uses Ethernet/Wi-Fi for transmission   |
++--------------------------+-----------------------------------------+
+| 1. Physical Layer        | Converts data to electrical signals    |
+|                          | Uses cables, Wi-Fi, fiber optics       |
++--------------------------+-----------------------------------------+
+```
+
+---
+
+### **📌 OSI Model Diagram for `www.hashedin.com` Web Request**
+```plaintext
+          User Enters URL (www.hashedin.com)
+                      │
+                      ▼
+        ┌──────────────────────────────┐
+        │  7. Application Layer         │   ← HTTP, DNS, TLS
+        │  (HTTP request sent)          │
+        └──────────────────────────────┘
+                      │
+                      ▼
+        ┌──────────────────────────────┐
+        │  6. Presentation Layer        │   ← TLS Encrypts Data
+        │  (HTTPS encryption)           │
+        └──────────────────────────────┘
+                      │
+                      ▼
+        ┌──────────────────────────────┐
+        │  5. Session Layer             │   ← TLS Session Established
+        │  (Manages secure session)     │
+        └──────────────────────────────┘
+                      │
+                      ▼
+        ┌──────────────────────────────┐
+        │  4. Transport Layer           │   ← TCP 3-Way Handshake (SYN, SYN-ACK, ACK)
+        │  (Reliable data transfer)     │
+        └──────────────────────────────┘
+                      │
+                      ▼
+        ┌──────────────────────────────┐
+        │  3. Network Layer             │   ← IP Address Resolved via DNS
+        │  (Packet Routing)             │
+        └──────────────────────────────┘
+                      │
+                      ▼
+        ┌──────────────────────────────┐
+        │  2. Data Link Layer           │   ← MAC Address & Ethernet Frame
+        │  (Converts packets to frames) │
+        └──────────────────────────────┘
+                      │
+                      ▼
+        ┌──────────────────────────────┐
+        │  1. Physical Layer            │   ← Electrical/RF Signals Transmitted
+        │  (Wired or Wireless transfer) │
+        └──────────────────────────────┘
+```
+
+---
+
+### **📝 Key Takeaways for Interview**
+1. **Application Layer:** HTTP request starts, DNS resolves `www.hashedin.com`.  
+2. **Presentation Layer:** TLS encrypts the data if HTTPS is used.  
+3. **Session Layer:** TLS establishes a secure session for multiple requests.  
+4. **Transport Layer:** TCP ensures reliable data transfer (3-way handshake).  
+5. **Network Layer:** Converts domain name to IP address and routes packets.  
+6. **Data Link Layer:** Frames are created with MAC address for LAN/WAN transfer.  
+7. **Physical Layer:** Data is transmitted via Ethernet, Wi-Fi, or Fiber optics.  
+
+---
+
+### **🎯 Interview Pro Tip**
+💡 **If asked to explain the process, use this structured approach:**  
+🔹 **"When I enter `www.hashedin.com`, the browser first performs a DNS query to resolve the domain into an IP address (Network Layer). Then, a TCP 3-way handshake occurs (Transport Layer). If HTTPS is used, a TLS handshake is done (Presentation Layer). The HTTP request is sent (Application Layer), and the response is received. The browser then renders the page for the user."**  
+
+✅ **This will make your answer clear, structured, and impressive!**  
+
+---
+
+Would you like me to add more details or refine the explanation? 🚀
