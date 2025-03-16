@@ -768,3 +768,29 @@ Here’s a **diagram** showing how the **OSI Model** is involved when you enter 
 ---
 
 Would you like me to add more details or refine the explanation? 🚀
+
+# ORDER
+The correct order is:  
+
+1️⃣ **DNS Resolution (Application Layer - OSI Layer 7)**  
+   - Resolves `www.hashedin.com` to an IP address.  
+
+2️⃣ **TCP Handshake (Transport Layer - OSI Layer 4)**  
+   - Establishes a reliable connection between client and server.  
+
+3️⃣ **TLS/SSL Handshake (Presentation & Session Layers - OSI Layers 6 & 5)**  
+   - Encrypts communication and verifies the server’s identity.  
+
+4️⃣ **HTTPS Request & Response (Application Layer - OSI Layer 7)**  
+   - The client sends an HTTPS request, and the server responds with the web page.  
+
+👉 **Where does OSI Model fit?**  
+- Each of the steps above maps to different OSI layers:  
+  - **DNS → Layer 7 (Application)**
+  - **TCP → Layer 4 (Transport)**
+  - **TLS/SSL → Layers 5 & 6 (Session & Presentation)**
+  - **HTTPS Request → Layer 7 (Application)**  
+
+So the **OSI model is not a separate step**—it’s a framework that describes how these steps interact across layers. 🚀  
+
+Let me know if you need further clarification!
