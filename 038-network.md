@@ -767,151 +767,184 @@ Here’s a **diagram** showing how the **OSI Model** is involved when you enter 
 
 ---
 
-Would you like me to add more details or refine the explanation? 🚀
 
-# ORDER
-The correct order is:  
+# Understanding OSI Model Execution Flow
 
-Great question! The OSI model is a **conceptual framework**, meaning it describes **how data flows** rather than enforcing a strict **step-by-step** order.  
+## Overview
+When you request a webpage (e.g., `www.hashedin.com`), the data transmission doesn't strictly follow a Layer 7 → Layer 1 sequence. Instead, different OSI layers operate in parallel to ensure efficient communication.
 
-### **Does the OSI Model Always Work from Layer 7 to Layer 1?**  
-- **Not necessarily!** The OSI model is layered, but in **real-world network communication**, layers interact dynamically.  
-- Some layers may be **skipped or work in parallel**, depending on the protocol in use.  
+This document explains the step-by-step process of how data is transmitted from a client to a server and back, using the **OSI model** as a reference.
 
 ---
+## **Forward Process: Client Request to Server**
 
-### **Breaking Down the Execution Flow**
-When you request a webpage (e.g., `www.hashedin.com`), the **order of operations doesn't strictly follow Layer 7 → Layer 1 sequentially**. Instead, here's what happens:
+### **1️⃣ DNS Resolution (Application Layer - Layer 7)**
+- The browser first checks its DNS cache.
+- If no cache is found, a DNS request is made to resolve `www.hashedin.com` into an IP address.
+- This process involves the **Application Layer (Layer 7)**.
 
-#### **1️⃣ DNS Resolution (Application Layer - Layer 7)**
-- The browser checks its DNS cache.
-- If no cache, it queries a **DNS server** to resolve `www.hashedin.com` into an **IP address**.
-- This step involves **Layer 7 (Application)** because DNS is an application-layer protocol.
+### **2️⃣ TCP Handshake (Transport Layer - Layer 4)**
+- Once the IP address is known, the browser initiates a **TCP handshake**:
+  - `SYN` → `SYN-ACK` → `ACK`
+- A reliable connection is established.
+- This happens at **Layer 4 (Transport Layer)**.
 
-#### **2️⃣ TCP Handshake (Transport Layer - Layer 4)**
-- Once the IP address is known, the browser starts a **TCP handshake** with the server (`SYN → SYN-ACK → ACK`).
-- This happens at **Layer 4 (Transport)**.
-- TCP **segments** the data for transmission.
-
-#### **3️⃣ TLS/SSL Handshake (Presentation & Session Layers - Layers 6 & 5)**
-- If **HTTPS** is used, a **TLS/SSL handshake** happens:
+### **3️⃣ TLS/SSL Handshake (Presentation & Session Layers - Layers 6 & 5)**
+- If HTTPS is used:
   - The browser requests the server’s **SSL certificate**.
   - Encryption keys are exchanged.
-  - Secure communication is established.
-- This process involves **Layer 6 (Presentation)** (encryption) and **Layer 5 (Session)** (session establishment).
+  - A secure communication channel is established.
+- **Layer 6 (Presentation Layer)** handles encryption, while **Layer 5 (Session Layer)** manages the session.
 
-#### **4️⃣ HTTPS Request & Response (Application Layer - Layer 7)**
+### **4️⃣ HTTPS Request & Response (Application Layer - Layer 7)**
 - The browser sends an **HTTP request** (e.g., `GET /index.html`).
-- The server responds with the requested **web page**.
-- All of this happens in **Layer 7 (Application)**.
+- The server processes it and prepares an HTTP response.
+- This occurs in **Layer 7 (Application Layer)**.
 
-#### **5️⃣ Data Transmission (All Layers Down to Layer 1)**
-- The HTTP response (web page) travels **down** the OSI layers:
-  - **Layer 4:** TCP adds headers (segmentation).
-  - **Layer 3:** IP adds addressing (routing).
-  - **Layer 2:** Data Link layer adds MAC addresses (framing).
-  - **Layer 1:** Physical layer converts frames into **electrical/wireless signals**.
-
-#### **6️⃣ Receiving Data (Layers 1 → 7 Reverse Order)**
-- The server's response **travels back up** the OSI layers on your device.
-- **Decryption (Layer 6), session handling (Layer 5), and reassembly (Layer 4) occur before the browser displays the page.**
+### **5️⃣ Data Transmission (Layers 4 → 1)**
+- The HTTP response **travels down the OSI layers**:
+  - **Layer 4:** TCP segments the data.
+  - **Layer 3:** IP assigns source & destination addresses.
+  - **Layer 2:** Data Link Layer encapsulates into frames.
+  - **Layer 1:** Physical Layer converts frames into signals.
 
 ---
 
-### **So, Does OSI Work in Strict Order?**
-❌ **No, it's not a rigid sequence.**  
-✅ **It works dynamically, with different layers operating in parallel or being skipped depending on the protocol used.**  
-
-For example:
-- **DNS works at Layer 7** but interacts directly with Layer 3 (IP).  
-- **TLS happens after TCP (Layer 4) but before HTTP (Layer 7).**  
-- **Some protocols, like UDP-based streaming, skip Layer 5 & 6 entirely.**  
-
-Would you like a diagram to visualize this better? 🚀
-
-So the **OSI model is not a separate step**—it’s a framework that describes how these steps interact across layers. 🚀  
-Once your request reaches the server via an **optical cable (Physical Layer - Layer 1)**, the server processes it by moving **up the OSI layers** in the reverse order. Here's a detailed step-by-step breakdown:
-
----
+## **Server-Side Processing (Reverse Order: Layer 1 → Layer 7)**
+Once the request reaches the **server**, it is processed by moving **up the OSI layers**:
 
 ### **1️⃣ Physical Layer (Layer 1) - Receiving the Signal**
-- The **optical signal** (light pulses in fiber-optic cables) arrives at the **server's network interface card (NIC)**.
-- The NIC **converts optical signals** into **electrical signals** (binary data: `1s` and `0s`).
-- This data is passed to **Layer 2 (Data Link Layer)**.
-
----
+- The optical signal (light pulses in fiber-optic cables) arrives at the server’s **Network Interface Card (NIC)**.
+- The NIC converts optical signals into **electrical signals (binary data: 1s and 0s)**.
+- The data is passed to **Layer 2 (Data Link Layer)**.
 
 ### **2️⃣ Data Link Layer (Layer 2) - Frame Processing**
-- The received **bits are grouped into frames**.
-- The NIC checks if the **destination MAC address** matches its own (Ethernet protocol).
-- **Error detection** is performed using **CRC (Cyclic Redundancy Check)**.
-- If everything is fine, the **frame header is removed**, and the packet is passed to **Layer 3 (Network Layer)**.
-
----
+- The NIC checks if the **destination MAC address** matches its own.
+- Error detection is performed using **CRC (Cyclic Redundancy Check)**.
+- The frame header is removed, and the packet is passed to **Layer 3 (Network Layer)**.
 
 ### **3️⃣ Network Layer (Layer 3) - IP Address Handling & Routing**
-- The server examines the **IP packet** and checks the **destination IP address**.
-- If the **destination IP** matches the server’s IP, it processes the request.
-- If not, the packet is **forwarded** to another network device (like a router).
-- The IP **header is removed**, and the **data is passed to Layer 4 (Transport Layer).**
-
----
+- The server examines the **destination IP address**.
+- If the destination IP matches the server, the request is processed.
+- The IP header is removed, and the data is passed to **Layer 4 (Transport Layer)**.
 
 ### **4️⃣ Transport Layer (Layer 4) - TCP/UDP Handling**
 - The server reads the **port number** to determine which application should handle the request.
 - If TCP:
   - The **sequence number** is checked to **reassemble segments** in the correct order.
   - An **ACK (acknowledgment)** is sent back to confirm receipt.
-- The **TCP header is removed**, and the **payload** is passed to Layer 5 (Session Layer).
-
----
+- The TCP header is removed, and the payload is passed to **Layer 5 (Session Layer)**.
 
 ### **5️⃣ Session Layer (Layer 5) - Managing the Connection**
-- If the request is encrypted (HTTPS), the **session is already established** from the TLS handshake.
-- If it's a new session, it may be **authenticated**.
-- The session ensures that **multiple requests** from the same client are handled properly.
-- The **session information is passed to Layer 6 (Presentation Layer).**
-
----
+- If HTTPS is used:
+  - The session is already established from the **TLS handshake**.
+  - Ensures that multiple requests from the same client are properly managed.
+- The session information is passed to **Layer 6 (Presentation Layer)**.
 
 ### **6️⃣ Presentation Layer (Layer 6) - Decryption & Data Formatting**
-- If **HTTPS** is used:
-  - The **TLS/SSL decryption** happens here.
-  - The encrypted **ciphertext** is converted into **plain HTTP data**.
-- If **compression** (e.g., Gzip) is used, the data is **decompressed**.
-- The cleaned-up **application data** is passed to Layer 7.
-
----
+- If HTTPS is used:
+  - The TLS/SSL **decryption happens here**.
+  - The encrypted **ciphertext is converted back into plain HTTP data**.
+  - If compression (e.g., Gzip) is used, the data is **decompressed**.
+- The cleaned-up application data is passed to **Layer 7**.
 
 ### **7️⃣ Application Layer (Layer 7) - Web Server Processing**
-- The **web server (e.g., Apache, Nginx, Node.js)** processes the **HTTP request**.
-- If it’s a `GET /index.html` request:
-  - The server retrieves the **HTML file** from storage.
-- If it's a **dynamic request** (e.g., fetching user data):
-  - The request is forwarded to a **backend application** (e.g., a Node.js/Java/Python API).
-  - The backend **queries a database (MySQL, MongoDB, etc.)** for the required data.
-  - The server **generates a response** (e.g., an HTML page or JSON data).
-- The **HTTP response is prepared** and sent **back down the OSI layers**.
+- The **web server (Apache, Nginx, Node.js, etc.)** processes the HTTP request.
+- If it’s a static page:
+  - The **HTML file** is retrieved from storage.
+- If it’s a dynamic request:
+  - The backend (e.g., **Node.js, Java, Python**) queries a database (MySQL, MongoDB).
+  - The server **generates a response (HTML/JSON/etc.)**.
+- The **HTTP response is prepared and sent back down the OSI layers**.
 
 ---
+
+## **Reverse Process: Sending Data Back to Client**
+The process indeed happens in reverse when the server sends the response back to the client. Here's how it works:
 
 ### **Reverse Process: Sending Data Back**
-After processing the request, the server **sends the response** back to the client **through the OSI layers in reverse**:
-1. **Application Layer (HTTP Response)**
-2. **Presentation Layer (Encryption with TLS)**
-3. **Session Layer (Ensuring Persistent Connection)**
-4. **Transport Layer (Segmenting & Adding TCP Headers)**
-5. **Network Layer (Adding Destination IP & Routing)**
-6. **Data Link Layer (Adding MAC Address & Converting to Frames)**
-7. **Physical Layer (Converting to Optical Signals & Sending via Fiber)**
+Once the server has processed the request and generated the response (e.g., an HTML page), it follows the OSI model in reverse, moving from **Layer 7 (Application Layer) down to Layer 1 (Physical Layer).**
+
+1️⃣ **Application Layer (Layer 7) - HTTP Response**  
+   - The server prepares the response (e.g., an HTML file or API JSON response).  
+   - The web server (Apache, Nginx, Node.js, etc.) formats the HTTP response.  
+
+2️⃣ **Presentation Layer (Layer 6) - Encryption**  
+   - If HTTPS is used, the response is encrypted using TLS.  
+   - Any necessary data compression (e.g., Gzip) is applied.  
+
+3️⃣ **Session Layer (Layer 5) - Maintaining the Connection**  
+   - Ensures that the same session is used for the client connection.  
+   - If multiple requests are sent, it maintains session persistence.  
+
+4️⃣ **Transport Layer (Layer 4) - TCP Segmentation**  
+   - The HTTP response is broken into TCP segments.  
+   - Each segment is given a sequence number to ensure proper order.  
+
+5️⃣ **Network Layer (Layer 3) - IP Routing**  
+   - The IP header is added, including the **destination IP (client’s IP).**  
+   - The packet is forwarded to the correct network interface.  
+
+6️⃣ **Data Link Layer (Layer 2) - MAC Address & Framing**  
+   - The packet is converted into **Ethernet frames.**  
+   - The **destination MAC address** (next hop router or client device) is attached.  
+
+7️⃣ **Physical Layer (Layer 1) - Transmission via Optical/Wireless Signals**  
+   - The frames are converted into **electrical, radio, or optical signals.**  
+   - The data is sent through **fiber-optic cables, WiFi, or copper Ethernet.**  
+
+### **Client Receiving Data (Reversing the Process)**
+When the client (browser) receives the response, it follows the **reverse order, moving from Layer 1 (Physical) back up to Layer 7 (Application):**  
+
+1️⃣ **Physical Layer** - Converts signals back into binary data.  
+2️⃣ **Data Link Layer** - Verifies frames and extracts packets.  
+3️⃣ **Network Layer** - Routes packets to the correct IP destination.  
+4️⃣ **Transport Layer** - Reassembles TCP segments and verifies order.  
+5️⃣ **Session Layer** - Ensures persistent connection.  
+6️⃣ **Presentation Layer** - Decrypts TLS and decompresses data.  
+7️⃣ **Application Layer** - Browser processes and renders the HTML page.  
+
+### **Final Step: Rendering the Web Page**
+- The browser interprets HTML, CSS, and JavaScript.  
+- Additional assets (images, CSS files, JavaScript) are fetched via new requests.  
+- The web page is displayed on the client’s screen.  
+
+So yes, the **OSI model applies in both directions**, ensuring structured communication from the client to the server and back! 🚀
 
 ---
 
-### **Final Step: Client Receives and Renders**
-- The response travels **back through the internet** following the same OSI process in reverse.
-- The browser **receives the response**, processes the HTML, CSS, and JavaScript, and **renders the webpage**.
+## **Final Step: Client Receives & Renders the Web Page**
+- The **browser receives the response** and processes the HTML, CSS, and JavaScript.
+- The webpage is **rendered** for the user to view.
 
-Would you like a **packet capture example (Wireshark) or a sequence diagram** for better understanding? 🚀
+---
+
+## **Does the OSI Model Work in Strict Order?**
+❌ No, it's not a rigid sequence.
+✅ Different layers operate in parallel depending on the protocol.
+
+For example:
+- **DNS (Layer 7) interacts directly with IP (Layer 3).**
+- **TLS (Layer 6) happens after TCP (Layer 4) but before HTTP (Layer 7).**
+- **Some protocols (e.g., UDP-based streaming) skip Layer 5 & 6 entirely.**
+
+---
+
+## **Conclusion**
+- The OSI model is a **conceptual framework** for understanding network communication.
+- It helps break down **how data travels between a client and a server**.
+- In practice, real-world implementations use a **combination of OSI and TCP/IP models**.
+
+---
+
+## **Want to See It in Action?**
+Would you like a **Wireshark packet capture example** or a **sequence diagram** to visualize this process? 🚀 Let us know!
+
+---
+
+
+
+# TCP/IP Model
 
 The **TCP/IP model** is a more practical and widely used networking model than the **OSI model**. It consists of **four layers** (instead of seven in OSI), and it closely represents how the Internet actually works.
 
