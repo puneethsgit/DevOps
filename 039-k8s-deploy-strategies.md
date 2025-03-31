@@ -289,7 +289,7 @@ Cluster
 
 ---
 
-### **Corrections & Key Additions:**
+
 ✅ The hierarchy you mentioned is **mostly correct**, but **the last level is the process running inside the container** (not just the application source code).  
 ✅ Kubernetes **Pods can have multiple containers**, which share storage and networking.  
 ✅ Additional components like **Services, Ingress, ConfigMaps, and Volumes** are important in real-world deployments.  
@@ -298,5 +298,54 @@ Cluster
 
 ### **Final Corrected Hierarchy:**  
 ✅ **Cluster → Node → Pod → Container → Process (Application)**  
+
+Let me know if you need more clarifications! 🚀
+
+Yes, you’ve got it **almost correct**! Let’s refine your understanding with a clearer explanation.  
+
+---
+
+### **Corrected Explanation:**  
+1️⃣ **Node** = An **EC2 instance** (or any virtual/physical machine). It is a worker machine in a Kubernetes cluster.  
+2️⃣ **Pods** = Kubernetes **runs Pods inside the Node**. A **Pod is NOT inside another Pod**—each Pod runs separately on the Node.  
+3️⃣ **Containers** = **Each Pod contains one or more Containers**. The application runs inside these containers.  
+
+---
+
+### **Final Correct Hierarchy (EC2 Perspective in Kubernetes)**  
+✅ **EC2 Instance (Node) → Kubernetes Pod → Container → Application Running**  
+
+---
+
+### **Example Explanation (Minikube or EKS on AWS):**  
+If you have an EKS cluster running on AWS, you can think of it like this:  
+
+- **Cluster** → The **whole EKS setup**  
+- **Node** → An **EC2 instance** running Kubernetes  
+- **Pod** → A **unit of deployment** inside the Node  
+- **Container** → Runs inside the Pod (uses Docker, containerd, or CRI-O)  
+- **Application** → The actual program running inside the container  
+
+---
+
+### **Visual Representation**
+```
+AWS EKS Cluster
+ ├── EC2 Node 1
+ │    ├── Pod A
+ │    │    ├── Container 1 (App 1)
+ │    │    └── Container 2 (App 2)
+ │    ├── Pod B
+ │         └── Container 3 (App 3)
+ │
+ ├── EC2 Node 2
+ │    ├── Pod C
+ │         └── Container 4 (App 4)
+```
+
+---
+
+
+✅ **Correct: A Pod runs inside a Node, and a Container runs inside a Pod.**  
 
 Let me know if you need more clarifications! 🚀
