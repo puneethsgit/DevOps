@@ -161,17 +161,81 @@ spec:
 
 ---
 
+## 4. Canary Deployment
+
+### Description
+Canary Deployment gradually introduces the new version to a small percentage of users before rolling it out completely.
+
+### Execution Steps
+1. Deploy a **small percentage** (e.g., 10%) of the new version.
+2. Monitor logs and performance.
+3. Gradually increase traffic to the new version.
+4. Roll back if necessary.
+
+### Pros
+- Reduces risk by testing in production.
+- Can detect issues early.
+
+### Cons
+- Requires monitoring and traffic control mechanisms.
+
+---
+
+## 5. A/B Testing Deployment
+
+### Description
+A/B Testing Deployment directs different segments of users to different versions for performance testing.
+
+### Execution Steps
+1. Deploy **two versions** (A and B) with different features.
+2. Route traffic based on user segments.
+3. Analyze which version performs better.
+
+### Pros
+- Data-driven decision-making.
+- Controlled rollout.
+
+### Cons
+- Requires complex routing and analytics.
+
+---
+
+## 6. Shadow Deployment
+
+### Description
+Shadow Deployment mirrors production traffic to a new version **without affecting users**.
+
+### Execution Steps
+1. Users continue using **Version A** (stable).
+2. Traffic is cloned and sent to **Version B** (new) silently.
+3. Analyze performance before full rollout.
+
+### Pros
+- No impact on users.
+- Real-time testing in production.
+
+### Cons
+- Requires additional resources for duplicated traffic.
+
+---
+
 ## Choosing the Right Strategy
-| Strategy       | Zero Downtime | Rollback Speed | Resource Usage |
-|---------------|--------------|---------------|---------------|
-| Rolling Update | ✅ Yes        | ❌ Slow       | ✅ Efficient  |
-| Recreate      | ❌ No         | ✅ Fast       | ✅ Efficient  |
-| Blue-Green    | ✅ Yes        | ✅ Fast       | ❌ High      |
+| Strategy         | Zero Downtime | Risk Level | Rollback Speed | Resource Usage |
+|----------------|--------------|------------|---------------|---------------|
+| Rolling Update | ✅ Yes       | Medium     | ❌ Slow       | ✅ Low        |
+| Recreate       | ❌ No        | High       | ✅ Fast       | ✅ Low        |
+| Blue-Green     | ✅ Yes       | Low        | ✅ Fast       | ❌ High      |
+| Canary         | ✅ Yes       | Very Low   | ✅ Fast       | ✅ Medium    |
+| A/B Testing    | ✅ Yes       | Medium     | ✅ Fast       | ❌ High      |
+| Shadow         | ✅ Yes       | Low        | ❌ Slow       | ❌ High      |
 
 ## Conclusion
 - **Rolling Update**: Best for most applications, ensuring availability.
 - **Recreate**: Simple but causes downtime, best for non-critical apps.
 - **Blue-Green**: Ideal for quick rollbacks but requires extra resources.
+- **Canary**: Ideal for minimizing risk by gradual rollout.
+- **A/B Testing**: Useful for feature testing based on user behavior.
+- **Shadow**: Good for testing without affecting users.
 
 Choose the best strategy based on your application's needs!
 
