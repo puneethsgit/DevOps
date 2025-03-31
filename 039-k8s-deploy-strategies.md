@@ -239,3 +239,64 @@ Shadow Deployment mirrors production traffic to a new version **without affectin
 
 Choose the best strategy based on your application's needs!
 
+Yes, your hierarchy is mostly correct, but there are a few additional components in Kubernetes that play a crucial role. Here’s the **complete** hierarchy, including some missing pieces:  
+
+---
+
+### **Full Kubernetes Hierarchy for a Deployed Application:**  
+1️⃣ **Cluster** → 2️⃣ **Node** → 3️⃣ **Pod** → 4️⃣ **Container** → 5️⃣ **Process (Application Running Inside the Container)**  
+
+---
+
+### **Detailed Breakdown with Missing Components:**
+| **Level** | **Description** |
+|-----------|----------------|
+| **1️⃣ Cluster** | The overall Kubernetes system that manages nodes, networking, and workloads. |
+| **2️⃣ Node** | A single worker machine (virtual or physical) that runs applications. Each node has a `kubelet`, `kube-proxy`, and a container runtime (like Docker). |
+| **3️⃣ Pod** | The smallest deployable unit in Kubernetes. It runs one or more containers and shares storage and networking. |
+| **4️⃣ Container** | A lightweight, isolated runtime environment (Docker, containerd, CRI-O) that runs the actual application. Containers are created from **Docker images**. |
+| **5️⃣ Process (Application)** | The actual program or application running inside the container. This is the final execution of your application source code. |
+
+---
+
+### **Additional Kubernetes Components (That Work Alongside This Hierarchy)**
+- **Control Plane (API Server, Scheduler, Controller Manager, etc.)** – Manages the cluster.
+- **Service** – Exposes the application (Pod) to the network.
+- **Ingress** – Manages external access (like an API Gateway or Load Balancer).
+- **ConfigMap & Secret** – Stores environment variables and sensitive data.
+- **Persistent Volume (PV) & Persistent Volume Claim (PVC)** – Manages storage for stateful applications.
+
+---
+
+### **Final Visual Representation:**
+```
+Cluster
+ ├── Node 1
+ │    ├── Pod A
+ │    │    ├── Container 1
+ │    │    │    └── Process (Application Running)
+ │    │    ├── Container 2
+ │    │         └── Process (Application Running)
+ │    ├── Pod B
+ │         └── Container 3
+ │              └── Process (Application Running)
+ │
+ ├── Node 2
+ │    ├── Pod C
+ │         └── Container 4
+ │              └── Process (Application Running)
+```
+
+---
+
+### **Corrections & Key Additions:**
+✅ The hierarchy you mentioned is **mostly correct**, but **the last level is the process running inside the container** (not just the application source code).  
+✅ Kubernetes **Pods can have multiple containers**, which share storage and networking.  
+✅ Additional components like **Services, Ingress, ConfigMaps, and Volumes** are important in real-world deployments.  
+
+---
+
+### **Final Corrected Hierarchy:**  
+✅ **Cluster → Node → Pod → Container → Process (Application)**  
+
+Let me know if you need more clarifications! 🚀
